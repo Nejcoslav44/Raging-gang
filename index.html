@@ -1,1 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five911 Illinois Reference</title>
+
+  <!--
+    FIVE911 ILLINOIS REFERENCE WEBSITE
+    ----------------------------------
+    Save this file as: index.html
+
+    Background image:
+    1. Put your background image in the same folder as this file.
+    2. Name it: five911-bg.jpg
+    3. To use another name, change BACKGROUND_FILE in the script below.
+
+    Optional logo:
+    Put a logo in the same folder and name it: five911-logo.png
+    If you do not add one, the site still works.
+
+    Hosting:
+    Upload index.html + five911-bg.jpg to GitHub Pages or any static host.
+  -->
+
+  <style>
+    :root {
+      --bg-image: url("five911-bg.jpg");
+      --navy-950: #020617;
+      --navy-925: #06101f;
+      --navy-900: #071426;
+      --navy-850: #0a1a32;
+      --navy-800: #0b2342;
+      --blue-500: #38bdf8;
+      --blue-400: #60a5fa;
+      --cyan-300: #67e8f9;
+      --text: #e5f0ff;
+      --muted: #9db3cc;
+      --muted-2: #6f87a3;
+      --line: rgba(148, 163, 184, 0.22);
+      --glass: rgba(7, 20, 38, 0.72);
+      --glass-strong: rgba(4, 15, 30, 0.88);
+      --danger: #f87171;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 22px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(2, 6, 23, 0.92), rgba(3, 12, 24, 0.82) 48%, rgba(8, 31, 61, 0.82)),
+        var(--bg-image) center / cover fixed no-repeat,
+        #020617;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(56, 189, 248, 0.18), transparent 30%),
+        radial-gradient(circle at 82% 16%, rgba(96, 165, 250, 0.16), transparent 34%),
+        linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.9));
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: min(1480px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 52px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px;
+      margin-bottom: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(2, 8, 18, 0.78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(145deg, rgba(56, 189, 248, 0.25), rgba(96, 165, 250, 0.08)),
+        rgba(10, 35, 66, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.24);
+      overflow: hidden;
+      flex: 0 0 auto;
+      color: var(--cyan-300);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .brand-title {
+      line-height: 1.02;
+      min-width: 0;
+    }
+
+    .brand-title strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-btn,
+    .ghost-btn,
+    .primary-btn,
+    .chip {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(8, 25, 48, 0.64);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .nav-btn:hover,
+    .ghost-btn:hover,
+    .chip:hover {
+      border-color: rgba(103, 232, 249, 0.48);
+      transform: translateY(-1px);
+      background: rgba(13, 42, 78, 0.82);
+    }
+
+    .nav-btn.active,
+    .primary-btn {
+      border-color: rgba(103, 232, 249, 0.55);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(30, 64, 175, 0.42));
+      box-shadow: 0 14px 30px rgba(14, 165, 233, 0.12);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .page {
+      display: none;
+      animation: fadeUp 0.22s ease both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-single {
+      grid-template-columns: minmax(320px, 520px);
+      justify-content: center;
+    }
+
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+
+    .panel-pad {
+      padding: 24px;
+    }
+
+    .hero-card {
+      min-height: 360px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      isolation: isolate;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -38% 22%;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent 62%);
+      filter: blur(14px);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--cyan-300);
+      background: rgba(8, 47, 73, 0.46);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.35rem, 5vw, 5.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.065em;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 2vw, 2.2rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .lead {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.65;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(3, 12, 24, 0.52);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.45rem;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .miranda-card {
+      aspect-ratio: 1 / 1;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      background:
+        linear-gradient(145deg, rgba(8, 47, 73, 0.4), rgba(2, 6, 23, 0.82)),
+        rgba(4, 15, 30, 0.84);
+    }
+
+    .miranda-card .badge {
+      width: fit-content;
+      color: #06101f;
+      background: var(--cyan-300);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-weight: 900;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .miranda-card ol {
+      margin: 18px 0 0;
+      padding-left: 22px;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: clamp(0.92rem, 1vw, 1.02rem);
+    }
+
+    .miranda-card li + li {
+      margin-top: 10px;
+    }
+
+    .miranda-footer {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 16px 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin-bottom: 0;
+      line-height: 1.55;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1 1 260px;
+    }
+
+    .search-wrap input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--line);
+      outline: none;
+      border-radius: 999px;
+      padding: 12px 14px 12px 42px;
+      color: var(--text);
+      background: rgba(2, 8, 18, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .select {
+      padding-left: 14px;
+      min-width: 220px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted-2);
+      pointer-events: none;
+    }
+
+    .code-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .code-groups {
+      display: grid;
+      gap: 18px;
+    }
+
+    .code-group {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(2, 8, 18, 0.38);
+      padding: 14px;
+    }
+
+    .code-group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .code-group-head strong {
+      color: var(--cyan-300);
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .code-group-head span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .code-card,
+    .law-card,
+    .category-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(3, 12, 24, 0.58);
+      transition: 0.18s ease;
+    }
+
+    .code-card {
+      padding: 15px;
+    }
+
+    .code-card:hover,
+    .law-card:hover,
+    .category-card:hover {
+      border-color: rgba(103, 232, 249, 0.45);
+      transform: translateY(-1px);
+      background: rgba(8, 30, 56, 0.7);
+    }
+
+    .code-tag {
+      display: inline-flex;
+      align-items: center;
+      min-width: 52px;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--cyan-300);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      margin-bottom: 11px;
+    }
+
+    .code-meaning {
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 0;
+    }
+
+    .source-note {
+      margin: 14px 0 0;
+      color: var(--muted-2);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .law-layout {
+      display: grid;
+      grid-template-columns: 350px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 104px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .quick-card {
+      padding: 18px;
+    }
+
+    .quick-card p {
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    .category-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .category-btn {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(2, 8, 18, 0.46);
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(103, 232, 249, 0.42);
+    }
+
+    .category-btn span:last-child {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .law-results {
+      display: grid;
+      gap: 12px;
+    }
+
+    .law-card {
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .law-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .law-title {
+      font-size: 1.02rem;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .law-ref {
+      flex: 0 0 auto;
+      color: var(--cyan-300);
+      font-weight: 850;
+      font-size: 0.82rem;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(8, 47, 73, 0.5);
+      border: 1px solid rgba(103, 232, 249, 0.18);
+    }
+
+    .law-summary {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .law-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-chip {
+      color: var(--muted);
+      background: rgba(2, 8, 18, 0.6);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 0.75rem;
+    }
+
+    .detail-empty,
+    .detail-panel {
+      min-height: 520px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(2, 8, 18, 0.72);
+      position: sticky;
+      top: 104px;
+    }
+
+    .detail-empty {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .detail-panel {
+      display: none;
+    }
+
+    .detail-panel.active {
+      display: block;
+    }
+
+    .detail-panel h2 {
+      margin-top: 8px;
+    }
+
+    .detail-ref {
+      color: var(--cyan-300);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .detail-body {
+      white-space: pre-wrap;
+      color: #d7e7f8;
+      line-height: 1.68;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(3, 12, 24, 0.62);
+      padding: 16px;
+      margin: 16px 0;
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .official-link {
+      color: #06101f;
+      background: var(--cyan-300);
+      border: 1px solid rgba(103, 232, 249, 0.72);
+      border-radius: 999px;
+      padding: 10px 14px;
+      text-decoration: none;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .laws-index {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .category-card {
+      padding: 16px;
+      text-decoration: none;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .category-card strong {
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .category-card span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .notice {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(251, 191, 36, 0.26);
+      background: rgba(120, 53, 15, 0.22);
+      color: #fde68a;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(2, 8, 18, 0.64);
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.88rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1050px) {
+      .hero,
+      .law-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar,
+      .detail-empty,
+      .detail-panel {
+        position: static;
+      }
+
+      .miranda-card {
+        aspect-ratio: auto;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .app-shell {
+        width: min(100% - 22px, 1480px);
+        padding-top: 12px;
+      }
+
+      .topbar {
+        border-radius: 24px;
+        align-items: flex-start;
+      }
+
+      .nav-actions {
+        display: none;
+        width: 100%;
+      }
+
+      .nav-actions.open {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-menu {
+        display: inline-flex;
+      }
+
+      .topbar {
+        flex-wrap: wrap;
+      }
+
+      .panel-pad,
+      .miranda-card {
+        padding: 18px;
+      }
+
+      .stat-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .law-card-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-label="Five911 logo">
+          <img id="logoImage" src="five911-logo.png" alt="Five911" />
+          <span id="logoFallback">911</span>
+        </div>
+        <div class="brand-title">
+          <strong>Five911</strong>
+          <span>Chicago · Illinois RP Reference</span>
+        </div>
+      </div>
+
+      <button class="ghost-btn mobile-menu" id="mobileMenuBtn" type="button">Menu</button>
+
+      <nav class="nav-actions" id="navActions" aria-label="Main navigation">
+        <button class="nav-btn active" type="button" data-page="codesPage">Codes & Miranda</button>
+        <button class="nav-btn" type="button" data-page="lawsPage">Illinois Laws</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page active" id="codesPage">
+        <div class="hero hero-single">
+          <aside class="panel miranda-card" aria-label="Miranda Rights card">
+            <div>
+              <span class="badge">Miranda Rights</span>
+              <ol>
+                <li>You have the right to remain silent.</li>
+                <li>Anything you say can and will be used against you in a court of law.</li>
+                <li>You have the right to an attorney.</li>
+                <li>If you cannot afford an attorney, one will be appointed for you before questioning, if you wish.</li>
+                <li>Do you understand these rights as I have read them to you?</li>
+              </ol>
+            </div>
+            <p class="miranda-footer">Note: departments may use slightly different wording. Keep it clear and readable.</p>
+          </aside>
+        </div>
+
+        <article class="panel panel-pad">
+          <div class="section-head">
+            <div>
+              <h2>Illinois Ten-Codes</h2>
+              <p>Search the code, meaning, or department. Duplicate codes are kept when different departments use different meanings.</p>
+            </div>
+            <button class="ghost-btn" type="button" id="resetCodeSearch">Clear Search</button>
+          </div>
+
+          <div class="toolbar">
+            <label class="search-wrap" for="codeSearch">
+              <span class="search-icon">⌕</span>
+              <input id="codeSearch" type="search" placeholder="Search ten-codes... example: 10-4, CPD, CFD, accident, emergency" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="code-groups" id="codeGrid"></div>
+          <p class="source-note">Source: Illinois radio-code page sections, reorganised for Five911 department labels: CPD, CFD, CSD, CEMS, and IST.</p>
+
+          <div class="section-head" style="margin-top: 30px;">
+            <div>
+              <h2>Police Phonetic Alphabet</h2>
+              <p>Generic police phonetic alphabet for spelling names, plates, callsigns, and locations over radio.</p>
+            </div>
+          </div>
+          <div class="code-grid" id="phoneticGrid"></div>
+        </article>
+      </section>
+
+      <section class="page" id="lawsPage">
+        <article class="panel panel-pad" style="margin-bottom: 18px;">
+          <span class="eyebrow">Law Browser</span>
+          <h1 style="font-size: clamp(2.1rem, 4vw, 4.6rem);">Illinois Laws</h1>
+          <p class="lead">
+            Search by law name, ILCS reference, category, or keyword. Click a law card to open the detail panel. The built-in list gives plain descriptions of common Illinois laws without relying on external government links.
+          </p>
+        </article>
+
+        <div class="law-layout">
+          <aside class="sidebar">
+            <article class="panel quick-card">
+              <h3>Search laws</h3>
+              <label class="search-wrap" for="lawSearch">
+                <span class="search-icon">⌕</span>
+                <input id="lawSearch" type="search" placeholder="Search: theft, DUI, weapon, battery..." autocomplete="off" />
+              </label>
+            </article>
+
+            <article class="panel quick-card">
+              <h3>Categories</h3>
+              <p>Use these for fast access.</p>
+              <div class="category-list" id="categoryList"></div>
+            </article>
+          </aside>
+
+          <section class="panel panel-pad">
+            <div class="notice">
+              Illinois law is huge. This file includes a searchable starter set of common law entries. For a larger database, add more objects to the <strong>LAW_DATA</strong> array in the script section.
+            </div>
+
+            <div class="section-head">
+              <div>
+                <h2 id="lawResultsTitle">All law entries</h2>
+                <p id="lawResultsMeta">Showing law entries.</p>
+              </div>
+              <button class="ghost-btn" type="button" id="clearLawFilters">Clear Filters</button>
+            </div>
+
+            <div class="law-layout" style="grid-template-columns: minmax(0, 1fr) minmax(340px, 0.85fr);">
+              <div class="law-results" id="lawResults"></div>
+
+              <aside>
+                <div class="detail-empty" id="detailEmpty">
+                  <div>
+                    <h2>Select a law</h2>
+                    <p>Click any law card on the left to show details here.</p>
+                  </div>
+                </div>
+
+                <article class="detail-panel" id="detailPanel" aria-live="polite">
+                  <div class="detail-ref" id="detailRef"></div>
+                  <h2 id="detailTitle"></h2>
+                  <div class="law-meta" id="detailMeta"></div>
+                  <div class="detail-body" id="detailBody"></div>
+                  <div class="detail-actions">
+                    <button class="ghost-btn" type="button" id="copyLawBtn">Copy law text</button>
+                  </div>
+                </article>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Built for Five911 reference use. This is not legal advice and should not replace department procedures, server rules, or legal review. Edit the arrays in the script to match your own charge list.
+    </footer>
+  </div>
+
+  <script>
+    const BACKGROUND_FILE = "five911-bg.jpg";
+    document.documentElement.style.setProperty("--bg-image", `url("${BACKGROUND_FILE}")`);
+
+    const logoImage = document.getElementById("logoImage");
+    const logoFallback = document.getElementById("logoFallback");
+    logoImage.addEventListener("load", () => {
+      logoImage.style.display = "block";
+      logoFallback.style.display = "none";
+    });
+    logoImage.addEventListener("error", () => {
+      logoImage.style.display = "none";
+      logoFallback.style.display = "inline";
+    });
+
+    const CHICAGO_CODES = [
+      { agency: "Chicago Police Department", code: "10-1", meaning: "Officer needs help" },
+      { agency: "Chicago Police Department", code: "10-4", meaning: "Acknowledge - 2 officer unit" },
+
+      { agency: "Chicago Taxi", code: "10-1", meaning: "Pick-up from street" },
+      { agency: "Chicago Taxi", code: "10-2", meaning: "Yes" },
+      { agency: "Chicago Taxi", code: "10-3", meaning: "No" },
+      { agency: "Chicago Taxi", code: "10-4", meaning: "Message understood" },
+      { agency: "Chicago Taxi", code: "10-6", meaning: "Passenger in car" },
+      { agency: "Chicago Taxi", code: "10-7", meaning: "Going off air" },
+      { agency: "Chicago Taxi", code: "10-8", meaning: "Ready to work" },
+      { agency: "Chicago Taxi", code: "10-9", meaning: "Repeat please" },
+      { agency: "Chicago Taxi", code: "10-12", meaning: "No load" },
+      { agency: "Chicago Taxi", code: "10-13", meaning: "Emergency" },
+      { agency: "Chicago Taxi", code: "10-14", meaning: "Suspicious passenger" },
+      { agency: "Chicago Taxi", code: "10-15", meaning: "Cancel the order" },
+      { agency: "Chicago Taxi", code: "10-16", meaning: "Call the office" },
+      { agency: "Chicago Taxi", code: "10-17", meaning: "Mechanical breakdown" },
+      { agency: "Chicago Taxi", code: "10-18", meaning: "Repairs completed" },
+      { agency: "Chicago Taxi", code: "10-19", meaning: "Come to the office" },
+      { agency: "Chicago Taxi", code: "10-20", meaning: "Location" },
+      { agency: "Chicago Taxi", code: "10-66", meaning: "Question for dispatch" },
+      { agency: "Chicago Taxi", code: "10-99", meaning: "Personal load" },
+      { agency: "Chicago Taxi", code: "10-100", meaning: "Out of car (5 min)" },
+
+      { agency: "Chicago Transit Authority", code: "10-1", meaning: "Receiving poorly" },
+      { agency: "Chicago Transit Authority", code: "10-2", meaning: "Receiving well" },
+      { agency: "Chicago Transit Authority", code: "10-3", meaning: "Stop transmitting" },
+      { agency: "Chicago Transit Authority", code: "10-4", meaning: "Message received/understood" },
+      { agency: "Chicago Transit Authority", code: "10-7", meaning: "Unit out of service" },
+      { agency: "Chicago Transit Authority", code: "10-8", meaning: "Unit in service" },
+      { agency: "Chicago Transit Authority", code: "10-10", meaning: "Police need assistance" },
+      { agency: "Chicago Transit Authority", code: "10-20", meaning: "What is your location" },
+      { agency: "Chicago Transit Authority", code: "10-21", meaning: "Call by telephone" },
+      { agency: "Chicago Transit Authority", code: "10-25", meaning: "Dirty vehicle" },
+      { agency: "Chicago Transit Authority", code: "10-31", meaning: "ATC bypass operation authorized" },
+      { agency: "Chicago Transit Authority", code: "10-32", meaning: "STEM bypass operation authorized" },
+      { agency: "Chicago Transit Authority", code: "10-33", meaning: "PCR bypass operation authorized" },
+      { agency: "Chicago Transit Authority", code: "10-40", meaning: "Radio check" },
+      { agency: "Chicago Transit Authority", code: "10-41", meaning: "Unauthorized switch" },
+      { agency: "Chicago Transit Authority", code: "10-42", meaning: "Abandoned bus" },
+      { agency: "Chicago Transit Authority", code: "10-49", meaning: "Check farebox" },
+      { agency: "Chicago Transit Authority", code: "10-50", meaning: "Make special service check" },
+      { agency: "Chicago Transit Authority", code: "10-51", meaning: "Go to location and assist" },
+      { agency: "Chicago Transit Authority", code: "10-52", meaning: "Manpower shortage" },
+      { agency: "Chicago Transit Authority", code: "10-53", meaning: "Use appropriate service restoration technique" },
+      { agency: "Chicago Transit Authority", code: "10-55", meaning: "Inspect all viaducts in district, check covers" },
+      { agency: "Chicago Transit Authority", code: "10-56", meaning: "Bus equipment shortage" },
+      { agency: "Chicago Transit Authority", code: "10-57", meaning: "Rail car shortage" },
+      { agency: "Chicago Transit Authority", code: "10-58", meaning: "Trip annulled (rail)" },
+      { agency: "Chicago Transit Authority", code: "10-59", meaning: "Salt over/under passes" },
+      { agency: "Chicago Transit Authority", code: "10-60", meaning: "Check employee" },
+      { agency: "Chicago Transit Authority", code: "10-61", meaning: "Employee injured" },
+      { agency: "Chicago Transit Authority", code: "10-62", meaning: "Employee sick" },
+      { agency: "Chicago Transit Authority", code: "10-63", meaning: "Other person sick/injured" },
+      { agency: "Chicago Transit Authority", code: "10-65", meaning: "Switch to alternate channel" },
+      { agency: "Chicago Transit Authority", code: "10-68", meaning: "Repeat message" },
+      { agency: "Chicago Transit Authority", code: "10-71", meaning: "Collision with fixed object" },
+      { agency: "Chicago Transit Authority", code: "10-72", meaning: "Collision with a person" },
+      { agency: "Chicago Transit Authority", code: "10-73", meaning: "Collision with other vehicle" },
+      { agency: "Chicago Transit Authority", code: "10-74", meaning: "Collision of CTA vehicles" },
+      { agency: "Chicago Transit Authority", code: "10-75", meaning: "Derailment" },
+      { agency: "Chicago Transit Authority", code: "10-77", meaning: "Have crew make announcement" },
+      { agency: "Chicago Transit Authority", code: "10-80", meaning: "Fire (give location)" },
+      { agency: "Chicago Transit Authority", code: "10-83", meaning: "Throwing at bus or train (give location)" },
+      { agency: "Chicago Transit Authority", code: "10-84", meaning: "Assist with fare dispute" },
+      { agency: "Chicago Transit Authority", code: "10-86", meaning: "Disturbance in progress" },
+      { agency: "Chicago Transit Authority", code: "10-87", meaning: "Hold/slow train until advised" },
+      { agency: "Chicago Transit Authority", code: "10-88", meaning: "Alarm: bus, train, or station" },
+      { agency: "Chicago Transit Authority", code: "10-90", meaning: "Bomb threat" },
+      { agency: "Chicago Transit Authority", code: "10-91", meaning: "Weapon threat" },
+      { agency: "Chicago Transit Authority", code: "10-99", meaning: "Dire emergency, stop all other radio transmissions" },
+
+      { agency: "Cook County Sheriff Police Action", code: "10-50j1", meaning: "Accident - no injury" },
+      { agency: "Cook County Sheriff Police Action", code: "10-50j2", meaning: "Accident - injury" },
+      { agency: "Cook County Sheriff Police Action", code: "10-50j3", meaning: "Accident - fatal" },
+      { agency: "Cook County Sheriff Police Action", code: "10-57j1", meaning: "Hit & run - no injury" },
+      { agency: "Cook County Sheriff Police Action", code: "10-57j2", meaning: "Hit & run - injury" },
+      { agency: "Cook County Sheriff Police Action", code: "10-57j3", meaning: "Hit & run - fatal" },
+      { agency: "Cook County Sheriff Police Action", code: "10-81j1", meaning: "Transporting personnel" },
+      { agency: "Cook County Sheriff Police Action", code: "10-81j2", meaning: "Transporting property" },
+      { agency: "Cook County Sheriff Police Action", code: "10-81j3", meaning: "Transporting prisoner" },
+      { agency: "Cook County Sheriff Police Action", code: "10-81j4", meaning: "Transporting papers" },
+
+      { agency: "DuPage County Police", code: "10-4", meaning: "Message received" },
+      { agency: "DuPage County Police", code: "10-6", meaning: "Busy, but available" },
+      { agency: "DuPage County Police", code: "10-7", meaning: "Out of service" },
+      { agency: "DuPage County Police", code: "10-8", meaning: "In service" },
+      { agency: "DuPage County Police", code: "10-9", meaning: "Repeat" },
+      { agency: "DuPage County Police", code: "10-20", meaning: "Location" },
+      { agency: "DuPage County Police", code: "10-23", meaning: "Arrived at scene" },
+      { agency: "DuPage County Police", code: "10-24", meaning: "Assignment completed" },
+      { agency: "DuPage County Police", code: "10-27", meaning: "Driver license check" },
+      { agency: "DuPage County Police", code: "10-28", meaning: "Vehicle license check" },
+      { agency: "DuPage County Police", code: "10-29", meaning: "Check for warrant/stolen" },
+      { agency: "DuPage County Police", code: "10-33", meaning: "Emergency" },
+      { agency: "DuPage County Police", code: "10-41", meaning: "Beginning tour of duty" },
+      { agency: "DuPage County Police", code: "10-42", meaning: "Ending tour of duty" },
+      { agency: "DuPage County Police", code: "10-46", meaning: "Motorist assist" },
+      { agency: "DuPage County Police", code: "10-50", meaning: "Traffic accident" },
+      { agency: "DuPage County Police", code: "10-57", meaning: "Hit and run accident" },
+      { agency: "DuPage County Police", code: "10-99", meaning: "Wanted or stolen" },
+
+      { agency: "Quincy & Adams County Police", code: "10-0", meaning: "Unable to copy" },
+      { agency: "Quincy & Adams County Police", code: "10-2", meaning: "Signal good" },
+      { agency: "Quincy & Adams County Police", code: "10-3", meaning: "Stop transmitting" },
+      { agency: "Quincy & Adams County Police", code: "10-4", meaning: "OK, affirmative" },
+      { agency: "Quincy & Adams County Police", code: "10-5", meaning: "Relay" },
+      { agency: "Quincy & Adams County Police", code: "10-6", meaning: "Busy, unless urgent" },
+      { agency: "Quincy & Adams County Police", code: "10-7", meaning: "Out of service" },
+      { agency: "Quincy & Adams County Police", code: "10-8", meaning: "In service" },
+      { agency: "Quincy & Adams County Police", code: "10-9", meaning: "Repeat" },
+      { agency: "Quincy & Adams County Police", code: "10-10", meaning: "Fight in progress" },
+      { agency: "Quincy & Adams County Police", code: "10-11", meaning: "Dog case" },
+      { agency: "Quincy & Adams County Police", code: "10-12", meaning: "Stand-by" },
+      { agency: "Quincy & Adams County Police", code: "10-13", meaning: "Road & weather conditions" },
+      { agency: "Quincy & Adams County Police", code: "10-14", meaning: "Prowler report" },
+      { agency: "Quincy & Adams County Police", code: "10-15", meaning: "Civil disturbance" },
+      { agency: "Quincy & Adams County Police", code: "10-16", meaning: "Domestic" },
+      { agency: "Quincy & Adams County Police", code: "10-17", meaning: "Meet with complainant" },
+      { agency: "Quincy & Adams County Police", code: "10-18", meaning: "Quickly" },
+      { agency: "Quincy & Adams County Police", code: "10-19", meaning: "Return to ..." },
+      { agency: "Quincy & Adams County Police", code: "10-20", meaning: "Location" },
+      { agency: "Quincy & Adams County Police", code: "10-21", meaning: "Call by telephone" },
+      { agency: "Quincy & Adams County Police", code: "10-22", meaning: "Disregard" },
+      { agency: "Quincy & Adams County Police", code: "10-23", meaning: "Arrived at scene" },
+      { agency: "Quincy & Adams County Police", code: "10-24", meaning: "Assignment completed" },
+      { agency: "Quincy & Adams County Police", code: "10-25", meaning: "Meet in person" },
+      { agency: "Quincy & Adams County Police", code: "10-26", meaning: "Detaining subject, expedite" },
+      { agency: "Quincy & Adams County Police", code: "10-27", meaning: "Driver license information" },
+      { agency: "Quincy & Adams County Police", code: "10-28", meaning: "Vehicle registration information" },
+      { agency: "Quincy & Adams County Police", code: "10-29", meaning: "Check for warrants" },
+      { agency: "Quincy & Adams County Police", code: "10-30", meaning: "Unnecessary use of radio" },
+      { agency: "Quincy & Adams County Police", code: "10-31", meaning: "Crime in progress" },
+      { agency: "Quincy & Adams County Police", code: "10-32", meaning: "Man with gun" },
+      { agency: "Quincy & Adams County Police", code: "10-33", meaning: "Emergency" },
+      { agency: "Quincy & Adams County Police", code: "10-34", meaning: "Riot" },
+      { agency: "Quincy & Adams County Police", code: "10-35", meaning: "Major crime alert" },
+      { agency: "Quincy & Adams County Police", code: "10-36", meaning: "Correct time" },
+      { agency: "Quincy & Adams County Police", code: "10-37", meaning: "Suspicious vehicle" },
+      { agency: "Quincy & Adams County Police", code: "10-38", meaning: "Stopping vehicle" },
+      { agency: "Quincy & Adams County Police", code: "10-39", meaning: "Urgent, use lights & siren" },
+      { agency: "Quincy & Adams County Police", code: "10-40", meaning: "Silent run" },
+      { agency: "Quincy & Adams County Police", code: "10-41", meaning: "Beginning duty" },
+      { agency: "Quincy & Adams County Police", code: "10-42", meaning: "Ending duty" },
+      { agency: "Quincy & Adams County Police", code: "10-43", meaning: "Information" },
+      { agency: "Quincy & Adams County Police", code: "10-44", meaning: "Permission to leave for ..." },
+      { agency: "Quincy & Adams County Police", code: "10-45", meaning: "Dead animal carcass at ..." },
+      { agency: "Quincy & Adams County Police", code: "10-46", meaning: "Assist motorist" },
+      { agency: "Quincy & Adams County Police", code: "10-47", meaning: "Road repair at ..." },
+      { agency: "Quincy & Adams County Police", code: "10-48", meaning: "Traffic standard repair" },
+      { agency: "Quincy & Adams County Police", code: "10-49", meaning: "Traffic light out at ..." },
+      { agency: "Quincy & Adams County Police", code: "10-50", meaning: "Accident" },
+      { agency: "Quincy & Adams County Police", code: "10-51", meaning: "Wrecker needed" },
+      { agency: "Quincy & Adams County Police", code: "10-52", meaning: "Ambulance needed" },
+      { agency: "Quincy & Adams County Police", code: "10-53", meaning: "Road blocked at ..." },
+      { agency: "Quincy & Adams County Police", code: "10-54", meaning: "Livestock on highway" },
+      { agency: "Quincy & Adams County Police", code: "10-55", meaning: "Intoxicated driver" },
+      { agency: "Quincy & Adams County Police", code: "10-56", meaning: "Intoxicated person" },
+      { agency: "Quincy & Adams County Police", code: "10-57", meaning: "Hit & run" },
+      { agency: "Quincy & Adams County Police", code: "10-58", meaning: "Direct traffic" },
+      { agency: "Quincy & Adams County Police", code: "10-59", meaning: "Convoy or escort" },
+      { agency: "Quincy & Adams County Police", code: "10-60", meaning: "Squad car in vicinity" },
+      { agency: "Quincy & Adams County Police", code: "10-61", meaning: "Personnel in area" },
+      { agency: "Quincy & Adams County Police", code: "10-62", meaning: "Reply to message" },
+      { agency: "Quincy & Adams County Police", code: "10-63", meaning: "Make written copy" },
+      { agency: "Quincy & Adams County Police", code: "10-64", meaning: "Message for local" },
+      { agency: "Quincy & Adams County Police", code: "10-65", meaning: "Net message assignment" },
+      { agency: "Quincy & Adams County Police", code: "10-66", meaning: "Cancel message" },
+      { agency: "Quincy & Adams County Police", code: "10-67", meaning: "Clear for net message" },
+      { agency: "Quincy & Adams County Police", code: "10-68", meaning: "Dispatch information" },
+      { agency: "Quincy & Adams County Police", code: "10-69", meaning: "Message received" },
+      { agency: "Quincy & Adams County Police", code: "10-70", meaning: "Fire alarm" },
+      { agency: "Quincy & Adams County Police", code: "10-71", meaning: "Advise nature of fire" },
+      { agency: "Quincy & Adams County Police", code: "10-72", meaning: "Report progress on fire" },
+      { agency: "Quincy & Adams County Police", code: "10-73", meaning: "Smoke report" },
+      { agency: "Quincy & Adams County Police", code: "10-74", meaning: "Negative" },
+      { agency: "Quincy & Adams County Police", code: "10-75", meaning: "In contact with" },
+      { agency: "Quincy & Adams County Police", code: "10-76", meaning: "Enroute" },
+      { agency: "Quincy & Adams County Police", code: "10-77", meaning: "ETA" },
+      { agency: "Quincy & Adams County Police", code: "10-78", meaning: "Need assistance" },
+      { agency: "Quincy & Adams County Police", code: "10-79", meaning: "Notify coroner" },
+      { agency: "Quincy & Adams County Police", code: "10-80", meaning: "Chase in progress" },
+      { agency: "Quincy & Adams County Police", code: "10-81", meaning: "Breathalyzer report" },
+      { agency: "Quincy & Adams County Police", code: "10-82", meaning: "Reserve lodging" },
+      { agency: "Quincy & Adams County Police", code: "10-83", meaning: "Work school crossing at ..." },
+      { agency: "Quincy & Adams County Police", code: "10-84", meaning: "If meeting ... advise ETA" },
+      { agency: "Quincy & Adams County Police", code: "10-85", meaning: "Delayed due to ..." },
+      { agency: "Quincy & Adams County Police", code: "10-86", meaning: "Officer on duty" },
+      { agency: "Quincy & Adams County Police", code: "10-87", meaning: "Pick up checks" },
+      { agency: "Quincy & Adams County Police", code: "10-88", meaning: "Present phone number of ..." },
+      { agency: "Quincy & Adams County Police", code: "10-89", meaning: "Bomb threat" },
+      { agency: "Quincy & Adams County Police", code: "10-90", meaning: "Bank alarm at" },
+      { agency: "Quincy & Adams County Police", code: "10-91", meaning: "Pick up prisoner/subject" },
+      { agency: "Quincy & Adams County Police", code: "10-92", meaning: "Improperly parked vehicle" },
+      { agency: "Quincy & Adams County Police", code: "10-93", meaning: "Blockade" },
+      { agency: "Quincy & Adams County Police", code: "10-94", meaning: "Drag racing" },
+      { agency: "Quincy & Adams County Police", code: "10-95", meaning: "Prisoner/subject in custody" },
+      { agency: "Quincy & Adams County Police", code: "10-96", meaning: "Mental subject" },
+      { agency: "Quincy & Adams County Police", code: "10-97", meaning: "Test signal" },
+      { agency: "Quincy & Adams County Police", code: "10-98", meaning: "Prison/jail break" },
+      { agency: "Quincy & Adams County Police", code: "10-99", meaning: "Wanted/stolen; subject with warrant" },
+      { agency: "Quincy & Adams County Police", code: "10-100", meaning: "Subject under arrest" },
+
+      { agency: "Rockford Fire Department", code: "10-1", meaning: "Signal weak" },
+      { agency: "Rockford Fire Department", code: "10-2", meaning: "Signal good" },
+      { agency: "Rockford Fire Department", code: "10-3", meaning: "Stop message" },
+      { agency: "Rockford Fire Department", code: "10-4", meaning: "Acknowledged" },
+      { agency: "Rockford Fire Department", code: "10-6", meaning: "Standby" },
+      { agency: "Rockford Fire Department", code: "10-7", meaning: "Out of service" },
+      { agency: "Rockford Fire Department", code: "10-8", meaning: "In service" },
+      { agency: "Rockford Fire Department", code: "10-9", meaning: "Repeat message" },
+      { agency: "Rockford Fire Department", code: "10-10", meaning: "Under control" },
+      { agency: "Rockford Fire Department", code: "10-15", meaning: "Disturbance" },
+      { agency: "Rockford Fire Department", code: "10-17", meaning: "Enroute to ..." },
+      { agency: "Rockford Fire Department", code: "10-19", meaning: "Return to HQ" },
+      { agency: "Rockford Fire Department", code: "10-20", meaning: "Location?" },
+      { agency: "Rockford Fire Department", code: "10-21", meaning: "Call police" },
+      { agency: "Rockford Fire Department", code: "10-23", meaning: "At the scene" },
+      { agency: "Rockford Fire Department", code: "10-25", meaning: "Inspecting" },
+      { agency: "Rockford Fire Department", code: "10-27", meaning: "To shops" },
+      { agency: "Rockford Fire Department", code: "10-29", meaning: "At drill" },
+      { agency: "Rockford Fire Department", code: "10-31", meaning: "Changing quarters" },
+      { agency: "Rockford Fire Department", code: "10-33", meaning: "Need police - emergency" },
+      { agency: "Rockford Fire Department", code: "10-38", meaning: "Requesting med channel" },
+      { agency: "Rockford Fire Department", code: "10-39", meaning: "Lights & siren run" },
+      { agency: "Rockford Fire Department", code: "10-40", meaning: "No lights/siren needed" },
+      { agency: "Rockford Fire Department", code: "10-41", meaning: "No med channel needed" },
+      { agency: "Rockford Fire Department", code: "10-50", meaning: "Accident" },
+      { agency: "Rockford Fire Department", code: "10-58", meaning: "Requesting traffic control" },
+      { agency: "Rockford Fire Department", code: "10-65", meaning: "Fire inspector response" },
+      { agency: "Rockford Fire Department", code: "10-66", meaning: "Call inspector" },
+      { agency: "Rockford Fire Department", code: "10-67", meaning: "Call inspector & coroner" },
+      { agency: "Rockford Fire Department", code: "10-68", meaning: "Call arson investigator" },
+      { agency: "Rockford Fire Department", code: "10-69", meaning: "Call arson and police" },
+      { agency: "Rockford Fire Department", code: "10-70", meaning: "Can handle alone or with ..." },
+      { agency: "Rockford Fire Department", code: "10-75", meaning: "Investigating" },
+      { agency: "Rockford Fire Department", code: "10-77", meaning: "False alarm" },
+      { agency: "Rockford Fire Department", code: "10-80", meaning: "Fire, no extra response" },
+      { agency: "Rockford Fire Department", code: "10-87", meaning: "Working fire, send help" },
+      { agency: "Rockford Fire Department", code: "10-90", meaning: "Have extra chief respond" }
+    ];
+
+    const PHONETIC_ALPHABET = [
+      ["A", "Adam"], ["B", "Boy"], ["C", "Charles"], ["D", "David"],
+      ["E", "Edward"], ["F", "Frank"], ["G", "George"], ["H", "Henry"],
+      ["I", "Ida"], ["J", "John"], ["K", "King"], ["L", "Lincoln"],
+      ["M", "Mary"], ["N", "Nora"], ["O", "Ocean"], ["P", "Paul"],
+      ["Q", "Queen"], ["R", "Robert"], ["S", "Sam"], ["T", "Tom"],
+      ["U", "Union"], ["V", "Victor"], ["W", "William"], ["X", "X-ray"],
+      ["Y", "Yellow"], ["Z", "Zebra"]
+    ];
+
+    const LAW_DATA = [
+      {
+        id: "murder",
+        category: "Criminal Offenses",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K9-1",
+        title: "First Degree Murder",
+        ref: "720 ILCS 5/9-1",
+        tags: ["homicide", "murder", "violent crime", "deadly force"],
+        summary: "Intentional or knowing unlawful killing, or killing during certain forcible felonies.",
+        fullText: `First degree murder covers an unlawful killing where the person intends to kill or cause great bodily harm, knows their acts will cause death, or knows their acts create a strong probability of death or great bodily harm.
+
+The law also covers deaths connected to certain forcible felonies. The charge focuses on the mental state, the act causing death, and whether there was legal justification.`
+      },
+      {
+        id: "assault",
+        category: "Criminal Offenses",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K12-1",
+        title: "Assault",
+        ref: "720 ILCS 5/12-1",
+        tags: ["threat", "fear", "violence"],
+        summary: "Conduct that places another person in reasonable apprehension of receiving a battery.",
+        fullText: `Assault is based on threatening conduct rather than physical contact. A person commits assault when their conduct places another person in reasonable fear that they are about to receive a battery.
+
+No actual injury is required. The central issue is whether the victim reasonably believed harmful or offensive physical contact was about to happen.`
+      },
+      {
+        id: "battery",
+        category: "Criminal Offenses",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K12-3",
+        title: "Battery",
+        ref: "720 ILCS 5/12-3",
+        tags: ["physical contact", "harm", "violence"],
+        summary: "Knowingly causing bodily harm or making insulting/provoking physical contact.",
+        fullText: `Battery involves actual bodily harm or physical contact. A person commits battery when they knowingly and without legal justification cause bodily harm to another person, or make physical contact of an insulting or provoking nature.
+
+The law covers both injury-causing contact and offensive contact that does not necessarily cause injury.`
+      },
+      {
+        id: "agg-battery",
+        category: "Criminal Offenses",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K12-3.05",
+        title: "Aggravated Battery",
+        ref: "720 ILCS 5/12-3.05",
+        tags: ["serious injury", "weapon", "officer", "aggravated"],
+        summary: "Battery with aggravating factors such as serious injury, protected victim, or weapon-related conduct.",
+        fullText: `Aggravated battery is a more serious form of battery. It depends on added factors such as great bodily harm, permanent disability, disfigurement, use of a deadly weapon, the victim's protected status, or the location/circumstances of the offense.
+
+The aggravating factor is what separates it from ordinary battery.`
+      },
+      {
+        id: "theft",
+        category: "Property Crimes",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K16-1",
+        title: "Theft",
+        ref: "720 ILCS 5/16-1",
+        tags: ["steal", "property", "shoplifting", "larceny"],
+        summary: "Unauthorized control over another person's property with intent to permanently deprive them of it.",
+        fullText: `Theft covers knowingly taking, obtaining, or controlling another person's property without authorization and with intent to deprive the owner of its use or benefit.
+
+The offense can also involve deception, threat, or knowingly possessing stolen property. Severity usually depends on the value and type of property.`
+      },
+      {
+        id: "robbery",
+        category: "Property Crimes",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K18-1",
+        title: "Robbery",
+        ref: "720 ILCS 5/18-1",
+        tags: ["force", "theft", "person", "mugging"],
+        summary: "Taking property from a person or their presence by force or threat of imminent force.",
+        fullText: `Robbery is theft from a person or from a person's presence by force or by threatening imminent force.
+
+The key distinction from ordinary theft is the direct confrontation and the use or threat of force during the taking.`
+      },
+      {
+        id: "burglary",
+        category: "Property Crimes",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K19-1",
+        title: "Burglary",
+        ref: "720 ILCS 5/19-1",
+        tags: ["entry", "building", "vehicle", "intent"],
+        summary: "Unauthorized entry into a protected place with intent to commit theft or felony.",
+        fullText: `Burglary involves entering or remaining in a building, vehicle, watercraft, aircraft, railroad car, or similar protected place without authority and with intent to commit theft or another felony inside.
+
+The offense focuses on unauthorized entry or remaining plus criminal intent.`
+      },
+      {
+        id: "criminal-damage",
+        category: "Property Crimes",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K21-1",
+        title: "Criminal Damage to Property",
+        ref: "720 ILCS 5/21-1",
+        tags: ["damage", "vandalism", "property"],
+        summary: "Knowingly damaging another person's property without consent.",
+        fullText: `Criminal damage to property covers knowingly damaging property belonging to another person without consent.
+
+The seriousness of the offense generally depends on the amount of damage, the type of property, and any special statutory circumstances.`
+      },
+      {
+        id: "disorderly",
+        category: "Public Order",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K26-1",
+        title: "Disorderly Conduct",
+        ref: "720 ILCS 5/26-1",
+        tags: ["public order", "disturbance", "false report", "breach of peace"],
+        summary: "Conduct that alarms or disturbs another and provokes a breach of the peace, plus certain false-report conduct.",
+        fullText: `Disorderly conduct is a broad public-order offense. It generally covers conduct that alarms or disturbs another person and provokes a breach of the peace.
+
+The statute also includes specific false-report and public-safety related conduct. Because the law is broad, the facts matter heavily.`
+      },
+      {
+        id: "resisting",
+        category: "Public Order",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K31-1",
+        title: "Resisting or Obstructing a Peace Officer",
+        ref: "720 ILCS 5/31-1",
+        tags: ["resisting", "obstruction", "officer", "arrest"],
+        summary: "Knowingly resisting or obstructing a known peace officer, firefighter, or correctional institution employee performing authorized duties.",
+        fullText: `This offense applies when a person knowingly resists or obstructs someone they know to be a peace officer, firefighter, or correctional institution employee performing an authorized official act.
+
+The conduct must actually resist, delay, interfere with, or obstruct official duties.`
+      },
+      {
+        id: "obstruct-id",
+        category: "Public Order",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K31-4.5",
+        title: "Obstructing Identification",
+        ref: "720 ILCS 5/31-4.5",
+        tags: ["identity", "false name", "traffic stop", "detention"],
+        summary: "Providing false identifying information to a peace officer after lawful arrest or detention.",
+        fullText: `Obstructing identification applies when a person knowingly gives a false or fictitious name, residence address, or date of birth to a peace officer after being lawfully arrested or lawfully detained.
+
+Both the false information and the lawful arrest or detention matter.`
+      },
+      {
+        id: "uuw",
+        category: "Weapons",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K24-1",
+        title: "Unlawful Use of Weapons",
+        ref: "720 ILCS 5/24-1",
+        tags: ["weapon", "firearm", "knife", "carry", "illegal weapon"],
+        summary: "Weapon possession/use restrictions covering specified prohibited weapons and conduct.",
+        fullText: `Unlawful use of weapons covers a range of prohibited weapon conduct involving certain firearms, knives, clubs, explosive devices, and other weapons.
+
+The exact offense depends on the weapon type, location, manner of possession or carry, and whether the person had legal authorization.`
+      },
+      {
+        id: "agg-uuw",
+        category: "Weapons",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072000050K24-1.6",
+        title: "Aggravated Unlawful Use of a Weapon",
+        ref: "720 ILCS 5/24-1.6",
+        tags: ["firearm", "loaded", "concealed", "aggravated weapon"],
+        summary: "More serious unlawful weapon conduct, often involving firearms and aggravating circumstances.",
+        fullText: `Aggravated unlawful use of a weapon is a more serious weapons offense. It commonly involves carrying or possessing a firearm under aggravating conditions, such as lack of required authorization or a loaded, immediately accessible firearm.
+
+The exact subsection depends on possession details, firearm status, location, and authorization.`
+      },
+      {
+        id: "possession-controlled",
+        category: "Drugs",
+        chapter: "720 ILCS - Criminal Offenses",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=072005700K402",
+        title: "Possession of Controlled Substance",
+        ref: "720 ILCS 570/402",
+        tags: ["drugs", "controlled substance", "possession", "narcotics"],
+        summary: "Knowing possession of a controlled or counterfeit substance, with penalties depending on substance and amount.",
+        fullText: `This offense covers knowingly possessing a controlled substance or counterfeit substance.
+
+The seriousness of the offense depends on the substance, amount, and surrounding statutory factors. Possession may be actual or constructive.`
+      },
+      {
+        id: "dui",
+        category: "Traffic / Vehicles",
+        chapter: "625 ILCS - Vehicles",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-501",
+        title: "Driving Under the Influence",
+        ref: "625 ILCS 5/11-501",
+        tags: ["DUI", "alcohol", "drugs", "impaired", "vehicle"],
+        summary: "Driving or being in actual physical control of a vehicle while impaired by alcohol, drugs, intoxicating compounds, or combinations.",
+        fullText: `Driving under the influence applies when a person drives or is in actual physical control of a vehicle while impaired by alcohol, drugs, intoxicating compounds, or a combination of substances.
+
+The law may also apply based on prohibited alcohol concentration or the presence of certain substances, depending on the facts and subsection.`
+      },
+      {
+        id: "reckless-driving",
+        category: "Traffic / Vehicles",
+        chapter: "625 ILCS - Vehicles",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-503",
+        title: "Reckless Driving",
+        ref: "625 ILCS 5/11-503",
+        tags: ["reckless", "driving", "vehicle", "dangerous"],
+        summary: "Driving with willful or wanton disregard for safety, or knowingly using an incline to make a vehicle airborne.",
+        fullText: `Reckless driving involves operating a vehicle with willful or wanton disregard for the safety of people or property.
+
+Illinois law also includes knowingly using an incline, such as a railroad crossing or bridge approach, to make a vehicle airborne.`
+      },
+      {
+        id: "speeding",
+        category: "Traffic / Vehicles",
+        chapter: "625 ILCS - Vehicles",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K11-601",
+        title: "Speed Restrictions",
+        ref: "625 ILCS 5/11-601",
+        tags: ["speeding", "traffic", "vehicle"],
+        summary: "Driving at a speed greater than is reasonable/proper, or above posted/statutory speed restrictions.",
+        fullText: `Illinois speed restrictions require drivers to operate at a speed that is reasonable and proper for conditions and not greater than the posted or statutory limit.
+
+A speed violation can be based on exceeding the limit or driving too fast for traffic, weather, visibility, road, or safety conditions.`
+      },
+      {
+        id: "no-license",
+        category: "Traffic / Vehicles",
+        chapter: "625 ILCS - Vehicles",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K6-101",
+        title: "No Valid Driver's License",
+        ref: "625 ILCS 5/6-101",
+        tags: ["license", "driver", "traffic"],
+        summary: "Driving a motor vehicle on a highway without a valid license or permit, subject to exceptions.",
+        fullText: `This law generally requires a person to have a valid driver's license or permit before driving a motor vehicle on a highway in Illinois.
+
+It is different from driving while license suspended or revoked, which is usually covered separately.`
+      },
+      {
+        id: "insurance",
+        category: "Traffic / Vehicles",
+        chapter: "625 ILCS - Vehicles",
+        chapterUrl: "https://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=062500050K3-707",
+        title: "Operation of Uninsured Motor Vehicle",
+        ref: "625 ILCS 5/3-707",
+        tags: ["insurance", "vehicle", "traffic"],
+        summary: "Operating or permitting operation of a motor vehicle without required liability insurance.",
+        fullText: `Illinois requires motor vehicles to be covered by liability insurance. This offense applies when a person operates, or allows another person to operate, a motor vehicle without required insurance coverage.
+
+The central issue is whether the vehicle was being operated without insurance required by law.`
+      }
+    ];
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    const navButtons = $$(".nav-btn");
+    const pages = $$(".page");
+    const navActions = $("#navActions");
+
+    navButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.page;
+        navButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
+        pages.forEach((page) => page.classList.toggle("active", page.id === target));
+        navActions.classList.remove("open");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    $("#mobileMenuBtn").addEventListener("click", () => {
+      navActions.classList.toggle("open");
+    });
+
+    function normalize(value) {
+      return String(value || "").toLowerCase().trim();
+    }
+
+    function renderCodes() {
+      const query = normalize($("#codeSearch").value);
+      const container = $("#codeGrid");
+
+      const filtered = CHICAGO_CODES
+        .filter((item) => {
+          return normalize(item.code).includes(query) || normalize(item.meaning).includes(query) || normalize(departmentCode(item.agency)).includes(query);
+        })
+        .sort((a, b) => {
+          const numberDiff = codeSortValue(a.code) - codeSortValue(b.code);
+          if (numberDiff !== 0) return numberDiff;
+          return a.agency.localeCompare(b.agency) || a.meaning.localeCompare(b.meaning);
+        });
+
+      if (!filtered.length) {
+        container.innerHTML = `<p class="source-note">No ten-codes found. Try a different search.</p>`;
+        return;
+      }
+
+      const grouped = filtered.reduce((groups, item) => {
+        const code = item.code;
+        if (!groups[code]) groups[code] = [];
+        groups[code].push(item);
+        return groups;
+      }, {});
+
+      container.innerHTML = Object.entries(grouped).map(([code, items]) => `
+        <section class="code-group">
+          <div class="code-group-head">
+            <strong>${escapeHtml(code)}</strong>
+            <span>${items.length} meaning${items.length === 1 ? "" : "s"}</span>
+          </div>
+          <div class="code-grid">
+            ${items.map((item) => `
+              <article class="code-card">
+                <div class="law-meta" style="margin-top: 0; margin-bottom: 10px;">
+                  <span class="code-tag" style="margin-bottom: 0;">${escapeHtml(item.code)}</span>
+                  <span class="mini-chip">${escapeHtml(departmentCode(item.agency))}</span>
+                </div>
+                <p class="code-meaning">${escapeHtml(item.meaning)}</p>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+      `).join("");
+    }
+
+    function codeSortValue(code) {
+      const match = String(code).match(/^10-([0-9]+)(?:j([0-9]+))?$/i);
+      if (!match) return 9999;
+      const main = Number(match[1]);
+      const suffix = match[2] ? Number(match[2]) / 10 : 0;
+      return main + suffix;
+    }
+
+    function departmentCode(agency) {
+      const value = normalize(agency);
+
+      if (value.includes("sheriff")) return "CSD";
+      if (value.includes("fire")) return "CFD";
+      if (value.includes("ems") || value.includes("ambulance") || value.includes("medical")) return "CEMS";
+      if (value.includes("state police") || value.includes("trooper")) return "IST";
+      if (value.includes("police")) return "CPD";
+
+      return "CPD";
+    }
+
+    function renderPhonetic() {
+      const grid = $("#phoneticGrid");
+      grid.innerHTML = PHONETIC_ALPHABET.map(([letter, word]) => `
+        <article class="code-card">
+          <div class="code-tag">${escapeHtml(letter)}</div>
+          <p class="code-meaning">${escapeHtml(word)}</p>
+        </article>
+      `).join("");
+    }
+
+    $("#codeSearch").addEventListener("input", renderCodes);
+    $("#resetCodeSearch").addEventListener("click", () => {
+      $("#codeSearch").value = "";
+      renderCodes();
+    });
+
+    let selectedCategory = "All";
+    let selectedLaw = null;
+
+    function categories() {
+      return ["All", ...new Set(LAW_DATA.map((law) => law.category))];
+    }
+
+    function renderCategories() {
+      const list = $("#categoryList");
+      list.innerHTML = categories().map((category) => {
+        const count = category === "All" ? LAW_DATA.length : LAW_DATA.filter((law) => law.category === category).length;
+        return `
+          <button type="button" class="category-btn ${category === selectedCategory ? "active" : ""}" data-category="${escapeHtml(category)}">
+            <span>${escapeHtml(category)}</span>
+            <span>${count}</span>
+          </button>
+        `;
+      }).join("");
+
+      $$(".category-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedCategory = button.dataset.category;
+          renderCategories();
+          renderLaws();
+        });
+      });
+    }
+
+    function lawMatches(law, query) {
+      const haystack = [law.title, law.ref, law.category, law.chapter, law.summary, ...(law.tags || [])].join(" ");
+      return normalize(haystack).includes(query);
+    }
+
+    function getFilteredLaws() {
+      const query = normalize($("#lawSearch").value);
+      return LAW_DATA.filter((law) => {
+        const categoryOk = selectedCategory === "All" || law.category === selectedCategory;
+        const queryOk = !query || lawMatches(law, query);
+        return categoryOk && queryOk;
+      });
+    }
+
+    function renderLaws() {
+      const results = getFilteredLaws();
+      const query = normalize($("#lawSearch").value);
+      $("#lawResultsTitle").textContent = selectedCategory === "All" ? "All law entries" : selectedCategory;
+      $("#lawResultsMeta").textContent = `${results.length} result${results.length === 1 ? "" : "s"}${query ? ` for “${$("#lawSearch").value}”` : ""}.`;
+
+      $("#lawResults").innerHTML = results.map((law) => `
+        <button type="button" class="law-card" data-law-id="${escapeHtml(law.id)}">
+          <div class="law-card-top">
+            <p class="law-title">${escapeHtml(law.title)}</p>
+            <span class="law-ref">${escapeHtml(law.ref)}</span>
+          </div>
+          <p class="law-summary">${escapeHtml(law.summary)}</p>
+          <div class="law-meta">
+            <span class="mini-chip">${escapeHtml(law.category)}</span>
+            <span class="mini-chip">${escapeHtml(law.chapter)}</span>
+            ${(law.tags || []).slice(0, 3).map((tag) => `<span class="mini-chip">${escapeHtml(tag)}</span>`).join("")}
+          </div>
+        </button>
+      `).join("") || `<p class="source-note">No laws found. Clear filters or try a broader search.</p>`;
+
+      $$(".law-card").forEach((card) => {
+        card.addEventListener("click", () => showLaw(card.dataset.lawId));
+      });
+    }
+
+    function showLaw(id) {
+      selectedLaw = LAW_DATA.find((law) => law.id === id);
+      if (!selectedLaw) return;
+
+      $("#detailEmpty").classList.add("hidden");
+      $("#detailPanel").classList.add("active");
+      $("#detailRef").textContent = selectedLaw.ref;
+      $("#detailTitle").textContent = selectedLaw.title;
+      $("#detailBody").textContent = selectedLaw.fullText;
+      $("#detailMeta").innerHTML = `
+        <span class="mini-chip">${escapeHtml(selectedLaw.category)}</span>
+        <span class="mini-chip">${escapeHtml(selectedLaw.chapter)}</span>
+        ${(selectedLaw.tags || []).map((tag) => `<span class="mini-chip">${escapeHtml(tag)}</span>`).join("")}
+      `;
+    }
+
+    $("#lawSearch").addEventListener("input", renderLaws);
+    $("#clearLawFilters").addEventListener("click", () => {
+      selectedCategory = "All";
+      $("#lawSearch").value = "";
+      renderCategories();
+      renderLaws();
+    });
+
+    $("#copyLawBtn").addEventListener("click", async () => {
+      if (!selectedLaw) return;
+      const text = `${selectedLaw.title}
+${selectedLaw.ref}
+${selectedLaw.chapter}
+
+${selectedLaw.fullText}
+`;
+      try {
+        await navigator.clipboard.writeText(text);
+        $("#copyLawBtn").textContent = "Copied";
+        setTimeout(() => ($("#copyLawBtn").textContent = "Copy law text"), 1200);
+      } catch {
+        alert("Could not copy automatically. Select the law text manually instead.");
+      }
+    });
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    $("#codeCount").textContent = CHICAGO_CODES.length;
+    $("#lawCount").textContent = LAW_DATA.length;
+
+    renderCodes();
+    renderPhonetic();
+    renderCategories();
+    renderLaws();
+  </script>
+</body>
+</html>
 
